@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>DawraGPT 🕌</title>
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: Arial;
+            text-align: center;
+        }
+
+```
+    #chat {
+        max-width: 500px;
+        margin: auto;
+        text-align: left;
+    }
+
+    .msg {
+        padding: 10px;
+        margin: 5px;
+        border-radius: 10px;
+    }
+
+    .user {
+        background: #2563eb;
+        text-align: right;
+    }
+
+    .bot {
+        background: #1e293b;
+    }
+
+    input {
+        width: 70%;
+        padding: 10px;
+    }
+
+    button {
+        padding: 10px;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<h1>🕌 DawraGPT</h1>
+
+<div id="chat"></div>
+
+<input id="input" placeholder="Frag etwas...">
+<button onclick="send()">Senden</button>
+
+<script>
+async function send() {
+    let input = document.getElementById("input");
+    let chat = document.getElementById("chat");
+
+    let userText = input.value;
+
+    if (!userText) return;
+
+    chat.innerHTML += `<div class="msg user">🧑 ${userText}</div>`;
+
+    let response = await fetch("https://dawra-gpt-1-2-lstv.vercel.app/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: userText })
+    });
+
+    let data = await response.json();
+
+    chat.innerHTML += `<div class="msg bot">🤖 ${data.answer}</div>`;
+
+    input.value = "";
+}
+</script>
+
+</body>
+</html>

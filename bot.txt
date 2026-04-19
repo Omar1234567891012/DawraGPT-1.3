@@ -1,0 +1,21 @@
+function send() {
+  let text = document.getElementById("input").value;
+  let chat = document.getElementById("chat");
+
+  chat.innerHTML += "<p>Du: " + text + "</p>";
+
+  let antwort = "Ich habe dich nicht verstanden 🤖";
+
+  if (text.toLowerCase() == "Hallo") {
+    antwort = "Hallo! Wie kann ich dir helfen";
+
+
+if (text.toLowerCase() == "hi") {
+    antwort = "Hallo! Wie kann ich dir helfen";
+  }
+
+  chat.innerHTML += "<p>Bot: " + antwort + "</p>";
+
+  document.getElementById("input").value = ""; // Eingabefeld leeren
+  chat.scrollTop = chat.scrollHeight; // Scroll nach unten
+}
